@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c32">
+  <title>La Rotonda Food | Pedidos</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#"><span class="brand-mark">LR</span><span><strong>LA ROTONDA</strong><small>FOOD</small></span></a>
+    <button id="cart-open" class="button button-dark cart-button">Mi pedido <span id="cart-count" class="count">0</span></button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">HECHO EN EL MOMENTO</span>
+        <h1>Algo rico.<br><em>Sin vueltas.</em></h1>
+        <p>Elegí tus favoritos, hacé tu pedido y disfrutá La Rotonda.</p>
+        <a class="button button-light" href="#menu">Ver menú <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="hero-art" aria-label="Hamburguesa ilustrativa"><div class="hero-circle">LR<br><small>FOOD</small></div></div>
+    </section>
+
+    <section id="menu" class="menu-section">
+      <div class="section-heading"><div><span class="eyebrow">NUESTRO MENÚ</span><h2>Elegí lo que te gusta</h2></div><p>Preparado al momento.</p></div>
+      <div id="category-list" class="category-list"></div>
+      <div id="product-grid" class="product-grid"><div class="empty-state">Cargando menú…</div></div>
+    </section>
+
+    <section class="how-section">
+      <div><span class="eyebrow">FÁCIL Y RÁPIDO</span><h2>Vos elegís.<br>Nosotros lo preparamos.</h2></div>
+      <p>Hacé tu pedido desde donde estés o escaneá el QR cuando nos visites. Pagás al retirar o en el local.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer"><span>LA ROTONDA FOOD</span><span>Buenos momentos, buena comida.</span></footer>
+
+  <div id="cart-drawer" class="drawer-backdrop hidden">
+    <aside class="drawer">
+      <div class="drawer-head"><div><span class="eyebrow">TU SELECCIÓN</span><h2>Mi pedido</h2></div><button id="cart-close" class="icon-button" aria-label="Cerrar">×</button></div>
+      <div id="cart-items" class="cart-items"><p class="muted">Todavía no agregaste productos.</p></div>
+      <div class="cart-total"><span>Total</span><strong id="cart-total">$ 0</strong></div>
+      <form id="checkout-form" class="checkout-form">
+        <label>Tu nombre<input id="customer-name" maxlength="80" required placeholder="¿Cómo te llamás?"></label>
+        <label>¿Cómo vas a disfrutar tu pedido?
+          <select id="order-type"><option value="pickup">Retirar en el mostrador</option><option value="dine_in">Consumir en el local</option></select>
+        </label>
+        <label id="table-field" class="hidden">Número de mesa (si corresponde)<input id="table-number" maxlength="20" placeholder="Ej. 4"></label>
+        <label>Observaciones generales<textarea id="order-notes" maxlength="300" rows="2" placeholder="Algún detalle para tener en cuenta…"></textarea></label>
+        <button class="button button-green full-width" type="submit">Enviar pedido <span>→</span></button>
+        <p class="fine-print">El pago se realiza en el local. El pedido queda sujeto a confirmación de cocina.</p>
+      </form>
+    </aside>
+  </div>
+
+  <div id="product-modal" class="modal-backdrop hidden">
+    <section class="modal">
+      <button id="product-modal-close" class="icon-button modal-close" aria-label="Cerrar">×</button>
+      <span class="eyebrow">PERSONALIZÁ TU PEDIDO</span>
+      <h2 id="modal-product-name"></h2><p id="modal-product-description" class="muted"></p>
+      <strong id="modal-product-price" class="modal-price"></strong>
+      <label>Cantidad<input id="modal-quantity" type="number" min="1" max="20" value="1"></label>
+      <label>Observaciones<textarea id="modal-notes" rows="3" maxlength="250" placeholder="Sin cebolla, bien cocido…"></textarea></label>
+      <button id="modal-add" class="button button-green full-width">Agregar al pedido</button>
+    </section>
+  </div>
+
+  <div id="confirmation-modal" class="modal-backdrop hidden">
+    <section class="modal confirmation">
+      <div class="success-mark">✓</div><span class="eyebrow">PEDIDO ENVIADO</span>
+      <h2>¡Gracias!</h2><p>Tu número de pedido es</p><strong id="confirmation-number" class="order-number"></strong>
+      <p class="muted">Guardá este código para consultar el estado de tu pedido.</p>
+      <div class="tracking-code"><span id="confirmation-token"></span><button id="copy-token" class="text-button">Copiar</button></div>
+      <button id="track-order" class="button button-green full-width">Ver estado del pedido</button>
+    </section>
+  </div>
+
+  <div id="tracking-modal" class="modal-backdrop hidden">
+    <section class="modal">
+      <button id="tracking-close" class="icon-button modal-close">×</button>
+      <span class="eyebrow">SEGUIMIENTO</span><h2>Tu pedido</h2>
+      <p id="tracking-number" class="order-number"></p>
+      <div id="tracking-status" class="tracking-status">Consultando…</div>
+      <button id="tracking-refresh" class="button button-green full-width">Actualizar estado</button>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="js/config.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/customer.js"></script>
+</body>
+</html>

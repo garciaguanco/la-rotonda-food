@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173c32"><title>La Rotonda | Consola</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="admin-body">
+  <header class="admin-header"><a class="brand" href="index.html"><span class="brand-mark">LR</span><span><strong>LA ROTONDA</strong><small>FOOD · GESTIÓN</small></span></a><div id="admin-user" class="muted"></div></header>
+  <main class="admin-main">
+    <section id="login-panel" class="login-panel">
+      <span class="eyebrow">ACCESO PRIVADO</span><h1>Consola de gestión</h1><p class="muted">Ingresá con el usuario autorizado del Food Truck.</p>
+      <form id="login-form" class="stack-form"><label>Email<input id="login-email" type="email" required autocomplete="username"></label><label>Contraseña<input id="login-password" type="password" required autocomplete="current-password"></label><button class="button button-green full-width">Ingresar</button><p id="login-error" class="error-text"></p></form>
+    </section>
+
+    <section id="app-panel" class="hidden">
+      <div class="admin-title"><div><span class="eyebrow">PANEL DE CONTROL</span><h1>Pedidos y cocina</h1></div><button id="logout-button" class="button button-outline">Cerrar sesión</button></div>
+      <nav class="tabs"><button class="tab active" data-tab="kitchen">Cocina</button><button class="tab" data-tab="products">Productos</button></nav>
+      <section id="kitchen-tab" class="tab-content">
+        <div class="order-columns">
+          <div><div class="column-title"><h2>Nuevos</h2><span id="new-count" class="count">0</span></div><div id="new-orders" class="order-list"></div></div>
+          <div><div class="column-title"><h2>En preparación</h2><span id="prep-count" class="count">0</span></div><div id="prep-orders" class="order-list"></div></div>
+          <div><div class="column-title"><h2>Listos</h2><span id="ready-count" class="count">0</span></div><div id="ready-orders" class="order-list"></div></div>
+        </div>
+      </section>
+      <section id="products-tab" class="tab-content hidden">
+        <div class="product-admin-layout">
+          <form id="product-form" class="product-form">
+            <span class="eyebrow">CARTA</span><h2>Agregar producto</h2>
+            <label>Nombre<input id="product-name" required maxlength="100"></label>
+            <label>Descripción<textarea id="product-description" rows="2" maxlength="250"></textarea></label>
+            <label>Precio (UYU)<input id="product-price" type="number" min="1" step="1" required></label>
+            <label>Categoría<input id="product-category" required maxlength="60" placeholder="Hamburguesas"></label>
+            <label>URL de imagen (opcional)<input id="product-image" type="url" placeholder="https://…"></label>
+            <button class="button button-green full-width">Guardar producto</button><p id="product-message" class="muted"></p>
+          </form>
+          <div><span class="eyebrow">MENÚ ACTUAL</span><h2>Productos</h2><div id="admin-products" class="admin-product-list"></div></div>
+        </div>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="js/config.js"></script><script src="js/store.js"></script><script src="js/admin.js"></script>
+</body>
+</html>
